@@ -33,10 +33,10 @@ class Program
     {
         return number * number;
     }
-    
-    static void DisplayResult(string name, int squaredNumber)
+
+    static void DisplayResult(string name, int sqnum)
     {
-        Console.WriteLine("Hello, {0}! Your favorite number squared is: {1}", name, squaredNumber);
+        Console.WriteLine("Hello, {0}! Your favorite number squared is: {1}", name, sqnum);
     }
 
 }
