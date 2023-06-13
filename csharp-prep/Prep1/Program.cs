@@ -15,20 +15,3 @@ class Program
 }
 
 
-namespace SpaceForNumbers
-{
-class Program1
-{
-    static void Main(int[] args)
-    {
-        Console.WriteLine("Give me a number! ");
-        int FirstNum = Console.ReadLine();
-
-        Console.WriteLine("Give me another numver! ");
-        int SecondNum = Console.ReadLine();
-
-        Console.WriteLine($"The numbers are{FirstNum} and {SecondNum}");
-    }
-}
-
-}
