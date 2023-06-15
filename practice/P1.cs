@@ -1,46 +1,43 @@
-﻿using System; 
+﻿using System;
 
-namespace first_excersice_basic
+namespace first_exercise_basic
 {
-    class Program
+    class Program1
     {
-        static void Main (string[] args)
-        {
-            int a = FirstNumber;
-            int b = SecondNumber;
-            int c = ThirdNumber;
-        }
-
-        static void WelcomeCalculator ()
+        static void Main(string[] args)
         {
             Console.WriteLine("Welcome to your calculator");
+
+            int a = GetFirstNumber();
+            int b = GetSecondNumber();
+            int c = GetThirdNumber();
+
+            FiguringOut(a, b, c);
         }
 
-        static int FirstNumber()
+        static int GetFirstNumber()
         {
-            Console.Write("Enter a number");
+            Console.Write("Enter a number: ");
             return int.Parse(Console.ReadLine());
         }
 
-        static int SecondNumber()
+        static int GetSecondNumber()
         {
-            Console.Write("Enter a number");
+            Console.Write("Enter a number: ");
             return int.Parse(Console.ReadLine());
         }
 
-        static int ThirdNumber()
+        static int GetThirdNumber()
         {
-            Console.Write("Enter a number");
+            Console.Write("Enter a number: ");
             return int.Parse(Console.ReadLine());
         }
-        
-        static void FiguringOut()
+
+        static void FiguringOut( int a, int b, int c)
         {
-                 int sum = a + b + c;
-
-            Console.WriteLine ($"The total number is {sum}");
-            Console.ReadLine ();
+            int sum = a + b + c;
+            Console.WriteLine($"The total number is {sum}");
+            Console.ReadLine();
         }
-
     }
 }
