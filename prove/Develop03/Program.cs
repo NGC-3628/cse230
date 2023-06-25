@@ -3,8 +3,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        string MENU = " 1. Moroni 10:5 \n 2. 3 Nephi 3:11 \n 3. Moroni 10: 29-30 \n 4. Isaac something \n Please, choose a scripture to memorize: ";
+        string MENU = " 1. Moroni 10:5 \n 2. 3 Nephi 3:11 \n 3. Moroni 10: 29-30 \n 4. Doctrine and Covenants 5:1-5 \n Please, choose a scripture to memorize: ";
         Console.WriteLine(MENU);
+        Console.WriteLine("Choose one scripture to memorize");
         int userInput = int.Parse(Console.ReadLine());
         switch (userInput)
         {
@@ -32,9 +33,9 @@ class Program
                 break;
 
             case 4:
-                text = "Abstraction is a vital idea in programming that involves simplifying intricate systems by breaking them down into clear and simple representations. It enables programmers to concentrate on the main aspects of a problem while hiding unnecessary information.";
+                text = "Now behold, a amarvelous work is about to come forth among the children of men. Therefore, O ye that embark in the service of God, see that ye serve him with all your heart, might, mind and strength, that ye may stand blameless before God at the last day. Therefore, if ye have desires to serve God ye are called to the work; For behold the field is white already to harvest; and lo, he that thrusteth in his sickle with his might, the same layeth up in store that he perisheth not, but bringeth salvation to his soul; And afaith, hope, charity and love, with an eye single to the glory of God, qualify him for the work. Remember faith, virtue, knowledge, temperance, patience, brotherly kindness, godliness, charity, humility, diligence. Ask, and ye shall receive; knock, and it shall be opened unto you. Amen..";
                 Scripture scripture4 = new Scripture(text);
-                Reference reference4 = new Reference("Isaac", 5,3,2);
+                Reference reference4 = new Reference("Doctrine and Covenants", 1,2,3);
 
                 UserInterface(scripture4, reference4);
                 break;
