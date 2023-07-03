@@ -4,18 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-                Assignment assig1 = new Assignment("Pedro Puno", "Multiplication");
-        Console.WriteLine(assig1.GetSummary());
+        // Create a base "Assignment" object
+        Assignment a1 = new Assignment("Samuel Bennett", "Multiplication");
+        Console.WriteLine(a1.GetSummary());
 
         // Now create the derived class assignments
-        MathAssignment assig2 = new MathAssignment("Joseph Carrick", "Divisions", "7.3", "8-19");
-        Console.WriteLine(assig2.GetSummary());
-        Console.WriteLine(assig2.GetHomeworkList());
+        MathAssignment a2 = new MathAssignment("Roberto Rodriguez", "Fractions", "7.3", "8-19");
+        Console.WriteLine(a2.GetSummary());
+        Console.WriteLine(a2.GetHomeworkList());
 
-        WritingAssignment assig3 = new WritingAssignment("Benson Bennet", "Italian History", "The Causes of World War V");
-        Console.WriteLine(assig3.GetSummary());
-        Console.WriteLine(assig3.GetWritingInformation());
-        
-
+        WritingAssignment a3 = new WritingAssignment("Mary Waters", "European History", "The Causes of World War II");
+        Console.WriteLine(a3.GetSummary());
+        Console.WriteLine(a3.GetWritingInformation());
     }
 }
