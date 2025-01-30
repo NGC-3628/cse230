@@ -1,94 +1,90 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UNIDAD13._0
+namespace draft_Projecto_1_habilidades_dig
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int HorasTrabajadasSemanal = 0;
-            double SueldoMensual = 0;
+            const double HORARIO_MENSUAL_NORMAL = 160;
 
-            Console.WriteLine("Ingrese las horas trabajadas en la semana: ");
-            HorasTrabajadasSemanal = int.Parse(Console.ReadLine());
+            double sueldoPorHora = 0;
+            double pagoHorasExtras = 0;
+            double descuentoPorFaltas = 0;
+            double sueldoTotal = 0;
 
-            if (HorasTrabajadasSemanal > 168)
+            // Entrada de datos
+            Console.WriteLine("¿Cuántas horas trabajaste?");
+            double horasTrabajadas = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("¿Cuál es tu sueldo mensual base?");
+            double sueldoMensual = Convert.ToDouble(Console.ReadLine());
+
+            // Cálculo del sueldo por hora
+            sueldoPorHora = sueldoMensual / HORARIO_MENSUAL_NORMAL;
+
+            // Calcular horas extras o faltantes
+            double horasExtras = 0;
+            double horasFaltantes = 0;
+
+            if (horasTrabajadas > HORARIO_MENSUAL_NORMAL)
             {
-                Console.WriteLine("Usted NO pudo haber trabajado más de 168 horas en la semana.");
+                horasExtras = horasTrabajadas - HORARIO_MENSUAL_NORMAL;
             }
-            else
+            else if (horasTrabajadas < HORARIO_MENSUAL_NORMAL)
             {
-                Console.WriteLine("Ingrese su salario mensual: ");
-                SueldoMensual = double.Parse(Console.ReadLine());
+                horasFaltantes = HORARIO_MENSUAL_NORMAL - horasTrabajadas;
+            }
 
-                const int JornadaMesCompleto = 4;
-                const int JornadaSemanalCompleta = 40;
-                const int JornadaDiaria = 8;
-                const int LimiteTEPorcentaje = 5;
-
-                double Residuo = HorasTrabajadasSemanal - JornadaSemanalCompleta;
-                double Porciento = 0.05;
-                double ContadorDeTE = 0;
-                double SueldoPorHora = (SueldoMensual / (JornadaSemanalCompleta * JornadaMesCompleto));
-                double AuxiliarDeResiduo = Residuo;
-
-                double HorasBase = Residuo > 0 ? JornadaSemanalCompleta : HorasTrabajadasSemanal;
-
-                while (Residuo > 0)
+            // Cálculo de pago por horas extras
+            if (horasExtras > 0)
+            {
+                if (horasExtras <= 5)
                 {
-                    if (Residuo <= LimiteTEPorcentaje || Porciento == 0.15)
-                    {
-                        ContadorDeTE += Residuo * (SueldoPorHora * (1 + Porciento));
-                        Residuo = 0;
-                    }
-                    else
-                    {
-                        ContadorDeTE += LimiteTEPorcentaje * (SueldoPorHora * (1 + Porciento));
-                        Residuo -= LimiteTEPorcentaje;
-                        Porciento += 0.02;
-                    }
+                    pagoHorasExtras += horasExtras * sueldoPorHora * 1.05;
                 }
-
-                double PorcentajeDescuentoPorHr = 0.01;
-                double ContadorDeDescuento = 0;
-                while (Residuo < 0)
+                else if (horasExtras <= 10)
                 {
-                    if (Residuo>-JornadaDiaria)
-                    {
-                        ContadorDeDescuento -= Residuo * SueldoPorHora;
-                        Residuo = 0;
-                    }
-                    else
-                    {
-                        ContadorDeDescuento -= SueldoPorHora * JornadaDiaria - (SueldoMensual * PorcentajeDescuentoPorHr);
-                        Residuo += JornadaDiaria;
-                    }
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.05; // Primeras 5 horas
+                    pagoHorasExtras += (horasExtras - 5) * sueldoPorHora * 1.07; // Siguientes 5 horas
                 }
-
-                double TotalSueldo = (HorasBase * SueldoPorHora) + ContadorDeTE - ContadorDeDescuento;
-
-                Console.WriteLine("Sueldo total: $" + TotalSueldo);
-
-                if (AuxiliarDeResiduo>0)
+                else if (horasExtras <= 15)
                 {
-                    Console.WriteLine("Total sueldo horas extras: $" + ContadorDeTE);
-                    Console.WriteLine("Total de horas extras: " + AuxiliarDeResiduo);
-                }
-                else if (AuxiliarDeResiduo<0)
-                {
-                    Console.WriteLine("Total descuento de horas de ausencia: $" + ContadorDeDescuento);
-                    Console.WriteLine("Total horas faltantes: " + AuxiliarDeResiduo);
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.05; // Primeras 5 horas
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.07; // Siguientes 5 horas
+                    pagoHorasExtras += (horasExtras - 10) * sueldoPorHora * 1.12; // Siguientes 5 horas
                 }
                 else
                 {
-                    Console.WriteLine("Sin calculos de horas extras, ni deducciones extras.");
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.05; // Primeras 5 horas
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.07; // Siguientes 5 horas
+                    pagoHorasExtras += 5 * sueldoPorHora * 1.12; // Siguientes 5 horas
+                    pagoHorasExtras += (horasExtras - 15) * sueldoPorHora * 1.15; // Horas adicionales al 15%
                 }
-                Console.ReadKey();
             }
+
+            // Cálculo de descuento por faltas
+            if (horasFaltantes > 0)
+            {
+                descuentoPorFaltas += horasFaltantes * sueldoPorHora;
+
+                // Descuento adicional por días completos de falta
+                int diasFaltados = (int)(horasFaltantes / 8);
+                descuentoPorFaltas += diasFaltados * (sueldoMensual * 0.01);
+            }
+
+            // Cálculo del sueldo total
+            sueldoTotal = sueldoMensual + pagoHorasExtras - descuentoPorFaltas;
+
+            // Salida de resultados
+            Console.WriteLine("Horas trabajadas: " + horasTrabajadas);
+            Console.WriteLine("Horas extras: " + horasExtras);
+            Console.WriteLine("Horas faltantes: " + horasFaltantes);
+            Console.WriteLine("Pago por horas extras: " + pagoHorasExtras);
+            Console.WriteLine("Descuento por faltas: " + descuentoPorFaltas);
+            Console.WriteLine("Sueldo total: " + sueldoTotal);
+
+            Console.ReadKey();
         }
     }
 }
